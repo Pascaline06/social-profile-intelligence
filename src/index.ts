@@ -62,21 +62,36 @@ app.get('/api/twitter/profile/:username', async (c) => {
 
   // STEP 2: Return premium data after payment header exists
   return c.json({
-    success: true,
-    premium: true,
-    platform: 'twitter',
+  success: true,
+  premium: true,
+  platform: 'twitter',
+  profile: {
     username,
-    followers: '12000',
-    following: '350',
+    display_name: 'Demo User',
+    bio: 'AI, tech, and startup content creator',
+    verified: true,
+    followers: 12000,
+    following: 350,
+    posts: 540,
     engagement_rate: '4.2%',
     fake_follower_score: '8%',
-    verified: true,
-    top_post: {
-      likes: 2400,
-      reposts: 320,
-      comments: 120,
-    },
-  });
+    profile_url: `https://x.com/${username}`,
+    created_at: '2024-01-01',
+  },
+  analytics: {
+    average_likes: 2400,
+    average_reposts: 320,
+    average_comments: 120,
+    audience_quality: 'High',
+    growth_trend: 'Positive',
+  },
+  top_post: {
+    content: 'Building in public changes everything.',
+    likes: 2400,
+    reposts: 320,
+    comments: 120,
+  },
+  generated_at: new Date().toISOString(),
 });
 
 serve({
