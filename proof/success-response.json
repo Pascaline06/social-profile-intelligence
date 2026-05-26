@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "premium": true,
+  "platform": "twitter",
+  "profile": {
+    "username": "testuser",
+    "display_name": "Demo User",
+    "bio": "AI, tech, and startup content creator",
+    "verified": true,
+    "followers": 12000,
+    "following": 350,
+    "posts": 540,
+    "engagement_rate": "4.2%"
+  }
+}
