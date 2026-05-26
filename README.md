@@ -40,6 +40,9 @@ Example:
 
 https://social-profile-intelligence.onrender.com/api/free-profile/testuser
 
+## Metadata Endpoint
+
+https://social-profile-intelligence.onrender.com/meta
 ---
 
 # Premium Endpoint
