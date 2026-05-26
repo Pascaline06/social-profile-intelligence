@@ -1,0 +1,9 @@
+{
+  "status": 402,
+  "message": "Payment required",
+  "price": {
+    "amount": "0.01",
+    "currency": "USDC"
+  },
+  "network": "base"
+}
