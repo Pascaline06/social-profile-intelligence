@@ -21,6 +21,21 @@ app.get('/health', (c) => {
     timestamp: new Date().toISOString(),
   });
 });
+app.get('/meta', (c) => {
+  return c.json({
+    service: 'Social Profile Intelligence API',
+    version: '1.0.0',
+    status: 'active',
+    supported_platforms: [
+      'Twitter/X'
+    ],
+    pricing: {
+      twitter_profile_lookup: '$0.01'
+    },
+    deployment: 'Render',
+    payment_network: 'Base USDC',
+  });
+});
 
 // FREE TEST ENDPOINT
 app.get('/api/free-profile/:username', async (c) => {
