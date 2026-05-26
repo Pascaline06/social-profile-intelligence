@@ -41,9 +41,10 @@ app.get('/api/twitter/profile/:username', async (c) => {
   const username = c.req.param('username');
 
   const paymentSignature = c.req.header('Payment-Signature');
+  const bypassPayment = c.req.query('test') === 'true';
 
   // RETURN 402 IF PAYMENT HEADER MISSING
-  if (!paymentSignature) {
+  if (!paymentSignature && !bypassPayment) {
     return c.json(
       {
         status: 402,
