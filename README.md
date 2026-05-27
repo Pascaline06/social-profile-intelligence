@@ -96,6 +96,15 @@ https://social-profile-intelligence.onrender.com/api/twitter/profile/rate-limit?
 - x402-style payment architecture
 
 ---
+## Comparison
+
+| Provider | Pricing Model | Estimated Cost | Twitter/X Support | API Access | Notes |
+|---|---|---|---|---|---|
+| HypeAuditor | Monthly subscription | $199+/mo | Yes | Limited | Expensive for small developers |
+| Modash | Monthly subscription | $299+/mo | Yes | Limited | Built for agencies |
+| Apify | Pay-per-usage | Variable | Partial | Yes | Higher scraping costs |
+| This Service | x402 pay-per-request | $0.01/profile | Yes | Yes | Lightweight and affordable |
+
 
 # Status Codes
 
