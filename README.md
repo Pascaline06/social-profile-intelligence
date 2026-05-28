@@ -116,6 +116,18 @@ https://social-profile-intelligence.onrender.com/api/twitter/profile/rate-limit?
 | 429 | Rate limit exceeded |
 
 ---
+Updated the `/api/twitter/profile/:username` endpoint to return live scraped Twitter/X profile data instead of mocked demo responses.
+
+The API now dynamically fetches:
+
+* verification status
+* profile bio
+* profile image
+* profile URL
+
+Live demo:
+https://social-profile-intelligence.onrender.com/api/twitter/profile/elonmusk?test=true
+
 
 # Deployment
 
