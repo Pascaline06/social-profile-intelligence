@@ -99,51 +99,49 @@ app.get('/api/twitter/profile/:username', async (c) => {
     );
   }
 
-  // PREMIUM RESPONSE
-  ```ts id="2ce8j4"
-try {
-  const profileUrl = `https://x.com/${username}`;
+  // LIVE SCRAPER
+  try {
+    const profileUrl = `https://x.com/${username}`;
 
-  const response = await fetch(profileUrl, {
-    headers: {
-      'User-Agent':
-        'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 Chrome/120 Safari/537.36',
-    },
-  });
+    const response = await fetch(profileUrl, {
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+      },
+    });
 
-  const html = await response.text();
+    const html = await response.text();
 
-  const bioMatch = html.match(/"description":"(.*?)"/);
-  const imageMatch = html.match(/"profile_image_url_https":"(.*?)"/);
-  const verifiedMatch = html.includes('"is_blue_verified":true');
+    const bioMatch = html.match(/"description":"(.*?)"/);
+    const imageMatch = html.match(/"profile_image_url_https":"(.*?)"/);
+    const verifiedMatch = html.includes('"is_blue_verified":true');
 
-  return c.json({
-    success: true,
-    premium: true,
-    platform: 'twitter',
-    profile: {
-      username,
-      bio: bioMatch ? bioMatch[1] : null,
-      verified: verifiedMatch,
-      profile_image: imageMatch
-        ? imageMatch[1].replace(/\\\\u002F/g, '/')
-        : null,
-      profile_url: profileUrl,
-    },
-    generated_at: new Date().toISOString(),
-  });
-} catch (error: any) {
-  return c.json(
-    {
-      success: false,
-      error: 'Failed to fetch live Twitter profile',
-      details: error.message,
-    },
-    500
-  );
-}
-```
-
+    return c.json({
+      success: true,
+      premium: true,
+      platform: 'twitter',
+      profile: {
+        username,
+        bio: bioMatch ? bioMatch[1] : null,
+        verified: verifiedMatch,
+        profile_image: imageMatch
+          ? imageMatch[1].replace(/\\\\u002F/g, '/')
+          : null,
+        profile_url: profileUrl,
+      },
+      generated_at: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    return c.json(
+      {
+        success: false,
+        error: 'Failed to fetch live Twitter profile',
+        details: error.message,
+      },
+      500
+    );
+  }
+});
 
 serve({
   fetch: app.fetch,
