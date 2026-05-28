@@ -100,39 +100,50 @@ app.get('/api/twitter/profile/:username', async (c) => {
   }
 
   // PREMIUM RESPONSE
+  ```ts id="2ce8j4"
+try {
+  const profileUrl = `https://x.com/${username}`;
+
+  const response = await fetch(profileUrl, {
+    headers: {
+      'User-Agent':
+        'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+    },
+  });
+
+  const html = await response.text();
+
+  const bioMatch = html.match(/"description":"(.*?)"/);
+  const imageMatch = html.match(/"profile_image_url_https":"(.*?)"/);
+  const verifiedMatch = html.includes('"is_blue_verified":true');
+
   return c.json({
     success: true,
     premium: true,
     platform: 'twitter',
     profile: {
       username,
-      display_name: 'Demo User',
-      bio: 'AI, tech, and startup content creator',
-      verified: true,
-      followers: 12000,
-      following: 350,
-      posts: 540,
-      engagement_rate: '4.2%',
-      fake_follower_score: '8%',
-      profile_url: `https://x.com/${username}`,
-      created_at: '2024-01-01',
-    },
-    analytics: {
-      average_likes: 2400,
-      average_reposts: 320,
-      average_comments: 120,
-      audience_quality: 'High',
-      growth_trend: 'Positive',
-    },
-    top_post: {
-      content: 'Building in public changes everything.',
-      likes: 2400,
-      reposts: 320,
-      comments: 120,
+      bio: bioMatch ? bioMatch[1] : null,
+      verified: verifiedMatch,
+      profile_image: imageMatch
+        ? imageMatch[1].replace(/\\\\u002F/g, '/')
+        : null,
+      profile_url: profileUrl,
     },
     generated_at: new Date().toISOString(),
   });
-});
+} catch (error: any) {
+  return c.json(
+    {
+      success: false,
+      error: 'Failed to fetch live Twitter profile',
+      details: error.message,
+    },
+    500
+  );
+}
+```
+
 
 serve({
   fetch: app.fetch,
